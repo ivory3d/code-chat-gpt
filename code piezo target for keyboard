@@ -1,0 +1,73 @@
+// capteur piezo controle par commande keyboadr by ivory for arduino Leonardo
+
+#include <Keyboard.h>
+
+// Configuration des broches pour les capteurs piézoélectriques
+const int capteur1Pin = A0;
+const int capteur2Pin = A1;
+const int capteur3Pin = A2;
+const int capteur4Pin = A3;
+const int capteur5Pin = A4;
+
+// Seuil pour détecter une pression (ajustez selon vos besoins)
+int seuilPressionCapteur1 = 200;
+int seuilPressionCapteur2 = 300;
+int seuilPressionCapteur3 = 260;
+int seuilPressionCapteur4 = 190;
+int seuilPressionCapteur5 = 220;
+
+void setup() {
+  // Initialisation de la communication série
+  Serial.begin(9600);
+
+  // Configuration des broches en entrée
+  pinMode(capteur1Pin, INPUT);
+  pinMode(capteur2Pin, INPUT);
+  pinMode(capteur3Pin, INPUT);
+  pinMode(capteur4Pin, INPUT);
+  pinMode(capteur5Pin, INPUT);
+}
+
+void loop() {
+  // Lecture des valeurs des capteurs
+  int valeurCapteur1 = analogRead(capteur1Pin);
+  int valeurCapteur2 = analogRead(capteur2Pin);
+  int valeurCapteur3 = analogRead(capteur3Pin);
+  int valeurCapteur4 = analogRead(capteur4Pin);
+  int valeurCapteur5 = analogRead(capteur5Pin);
+
+  // Vérification si la pression dépasse le seuil
+  if (valeurCapteur1 > seuilPressionCapteur1) {
+    Serial.println("Capteur 1 appuyé !");
+    Keyboard.press('1');
+    Keyboard.releaseAll();
+    // Ajoutez ici le code à exécuter lorsque le capteur 1 est pressé
+  }
+  if (valeurCapteur2 > seuilPressionCapteur2) {
+    Serial.println("Capteur 2 appuyé !");
+    Keyboard.press('2');
+    Keyboard.releaseAll();
+    // Ajoutez ici le code à exécuter lorsque le capteur 2 est pressé
+  }
+  if (valeurCapteur3 > seuilPressionCapteur3) {
+    Serial.println("Capteur 3 appuyé !");
+    Keyboard.press('3');
+    Keyboard.releaseAll();
+
+ }
+  if (valeurCapteur4 > seuilPressionCapteur4) {
+    Serial.println("Capteur 4 appuyé !");
+    Keyboard.press('4');
+    Keyboard.releaseAll();
+  
+  }
+  if (valeurCapteur5 > seuilPressionCapteur5) {
+    Serial.println("Capteur 5 appuyé !");
+    Keyboard.press('5');
+    Keyboard.releaseAll();
+  
+
+}
+  // Délai pour éviter la détection multiple
+  delay(10);
+}
